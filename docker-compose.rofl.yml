@@ -2,7 +2,7 @@ services:
   talos-agent:
     build: .
     # NOTE: Run ./scripts/build_container_image.sh to retrieve the digest.
-    image: ghcr.io/kostko/talos:latest-agent@sha256:cd925141a002c09b3bdde871981cba5a197c662e80663ca859984922721d0c7a
+    image: ghcr.io/lukaw3d/talos:latest-agent@sha256:b3ec28d4a8bc083c0ba92bc4caa881129a45738d019f2be224083b5a347ccd97
     container_name: talos-agent
     restart: unless-stopped
     environment:

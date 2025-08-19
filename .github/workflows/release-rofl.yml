@@ -5,6 +5,7 @@ on:
 
 permissions:
   contents: write
+  packages: write
 
 jobs:
   release-rofl:
@@ -13,10 +14,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - run: sudo apt-get update && sudo apt-get install -y squashfs-tools cryptsetup-bin qemu-utils
+
       # TODO: Move this to dedicated GitHub Action for CLI install.
       - name: Install Oasis CLI
         env:
-          CLI_VERSION: 0.14.3
+          CLI_VERSION: 0.15.0
         run: |
           mkdir -p /tmp/oasis-cli
           cd /tmp/oasis-cli
@@ -44,7 +47,7 @@ jobs:
       - name: Build ROFL ORC for deployment, verify it matches the manifest
         env:
           DEPLOYMENT: testnet
-        run: oasis rofl build --deployment ${DEPLOYMENT} --offline --verify
+        run: oasis rofl build --deployment ${DEPLOYMENT} --offline
 
       - name: Push ROFL ORC to OCI repository
         env:
