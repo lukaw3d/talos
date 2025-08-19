@@ -36,7 +36,7 @@ jobs:
 
       - name: Build Talos Docker image
         env:
-          TARGET_IMAGE: ghcr.io/kostko/talos:latest-agent
+          TARGET_IMAGE: ghcr.io/lukaw3d/talos:latest-agent
         run: ./scripts/build_container_image.sh
 
       # TODO: Verify that the image digest matches what is in the manifest.
