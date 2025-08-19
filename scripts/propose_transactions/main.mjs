@@ -102,10 +102,24 @@ const safeTransaction = await protocolKitOwner1.createTransaction({
 const safeTxHash = await protocolKitOwner1.getTransactionHash(safeTransaction)
 const signature = await protocolKitOwner1.signHash(safeTxHash)
 
-await apiKit.proposeTransaction({
-  safeAddress: await protocolKitOwner1.getAddress(),
-  safeTransactionData: safeTransaction.data,
-  safeTxHash,
-  senderAddress: signature.signer,
-  senderSignature: signature.data,
-})
+// Safe API is flaky. Retry a few times.
+await (async () => {
+  for (let i = 0; i < 5; i++) {
+    try {
+      await apiKit.proposeTransaction({
+        safeAddress: await protocolKitOwner1.getAddress(),
+        safeTransactionData: safeTransaction.data,
+        safeTxHash,
+        senderAddress: signature.signer,
+        senderSignature: signature.data,
+      })
+      console.log('Proposed')
+      return
+    } catch (e) {
+      console.log(e)
+      console.log('Retrying..')
+      new Promise(r => setTimeout(r, 3000))
+    }
+  }
+  console.log('Gave up')
+})()
