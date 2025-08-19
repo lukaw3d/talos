@@ -40,7 +40,7 @@ jobs:
       - name: Build ROFL ORC for deployment, verify it matches the manifest
         env:
           DEPLOYMENT: testnet
-        run: oasis rofl build --deployment ${DEPLOYMENT} --offline
+        run: oasis rofl build --deployment ${DEPLOYMENT} --offline --verify
 
       - name: Push ROFL ORC to OCI repository
         env:
