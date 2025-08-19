@@ -14,6 +14,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - run: sudo apt-get update && sudo apt-get install -y squashfs-tools cryptsetup-bin qemu-utils
+
       # TODO: Move this to dedicated GitHub Action for CLI install.
       - name: Install Oasis CLI
         env:
