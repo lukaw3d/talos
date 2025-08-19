@@ -23,7 +23,7 @@ deployments:
     network: testnet
     paratime: sapphire
     admin: talos_testnet_boot
-    oci_repository: ghcr.io/lukaw3d/talos:latest-orc
+    oci_repository: rofl.sh/69a4e225-30d5-4062-854a-ab2d1f92de31:1755645700
     trust_root:
       height: 27959263
       hash: 6c532bc656539449892330df3d78a110a6359013c985627ed5fafcef22e2b755
