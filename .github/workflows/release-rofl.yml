@@ -49,8 +49,10 @@ jobs:
       - name: Push ROFL ORC to OCI repository
         env:
           DEPLOYMENT: testnet
-        run: oasis rofl push --deployment ${DEPLOYMENT} --format json
-        # TODO: Parse OCI reference from output.
+        run: |
+          OCI_AND_HASH=$(oasis rofl push --deployment ${DEPLOYMENT} --format json)
+          echo "OCI_AND_HASH=${OCI_AND_HASH//$'\n'/}" >> $GITHUB_ENV
+        # { "manifest_hash": "97...", "oci_reference": "rofl.sh/d8..:17..@sha256:53.." }
 
       - name: Set up Node.js 22
         uses: actions/setup-node@v4
@@ -64,4 +66,4 @@ jobs:
         working-directory: scripts/propose_transactions
 
       - name: Propose transactions to safe.oasis.io
-        run: node ./scripts/propose_transactions/main.mjs "${{ secrets.PROPOSER_PRIVATE_KEY }}"
+        run: node ./scripts/propose_transactions/main.mjs "${OCI_AND_HASH}" "${{ secrets.PROPOSER_PRIVATE_KEY }}"
