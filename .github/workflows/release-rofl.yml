@@ -60,6 +60,7 @@ jobs:
         with:
           node-version: '22.x'
           cache: yarn
+          cache-dependency-path: scripts/propose_transactions
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
