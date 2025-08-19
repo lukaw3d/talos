@@ -15,5 +15,7 @@ docker buildx build \
 	--no-cache \
 	--build-arg SOURCE_DATE_EPOCH="${SOURCE_DATE_EPOCH}" \
 	--output type=docker,name=$TARGET_IMAGE,rewrite-timestamp=true \
+	-t $TARGET_IMAGE \
+	--push \
 	.
 
