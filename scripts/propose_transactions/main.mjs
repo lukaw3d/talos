@@ -12,10 +12,10 @@ global.XMLHttpRequest = xhr2;
 const OCI_AND_HASH = JSON.parse(process.argv[2])
 const PROPOSER_PRIVATE_KEY = process.argv[3]
 
-const APP_ID = 'rofl1qz8c57nvrru0rdtv7242rzwv269a87zh6c8auqr3'
+const APP_ID = 'rofl1qrc7dgf5u35w6vlg39surh6tukc77mj0fgl9ev6u'
 const MACHINE = {
-  provider: 'oasis1qrfeadn03ljm0kfx8wx0d5zf6kj79pxqvv0dukdm',
-  id: '0000000000000004',
+  provider: 'oasis1qp2ens0hsp7gh23wajxa4hpetkdek3swyyulyrmz',
+  id: '0000000000000256',
 }
 const SAFE_ADDRESS = '0x4b5ca97d1F45a8b589c0C161ebB258D50F756468'
 
