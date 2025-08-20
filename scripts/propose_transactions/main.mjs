@@ -43,6 +43,19 @@ async function generateTransactions() {
     .query(nic)
   console.log('Found app', app)
 
+  const machine = await roflmarket.queryInstance().setArgs({
+    id: oasis.misc.fromHex(MACHINE.id),
+    provider: oasis.staking.addressFromBech32(MACHINE.provider),
+  }).query(nic)
+  console.log('Found machine', machine)
+
+  if (!machine.deployment?.app_id) {
+    throw new Error(`Machine ${MACHINE.id} isn't running any app. Expected ${APP_ID}`)
+  }
+  if (oasisRT.rofl.toBech32(machine.deployment.app_id) !== APP_ID) {
+    throw new Error(`Machine ${MACHINE.id} is running app ${oasisRT.rofl.toBech32(machine.deployment.app_id)}. Expected ${APP_ID}`)
+  }
+
   const txUpdateEnclaves = rofl.callUpdate().setBody({
     id: app.id,
     admin: app.admin,
